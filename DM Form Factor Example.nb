@@ -1,0 +1,527 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20063,        519]
+NotebookOptionsPosition[     17460,        471]
+NotebookOutlinePosition[     17853,        487]
+CellTagsIndexPosition[     17810,        484]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DM Form Factor - Example", "Title",
+ CellChangeTimes->{{3.910061140104474*^9, 3.910061165154407*^9}, {
+  3.910061573053871*^9, 
+  3.9100615768247232`*^9}},ExpressionUUID->"86958cbe-8928-4808-af30-\
+30277e41ee1f"],
+
+Cell["\<\
+Loading the DMForm Factor Mathematica package \
+\[OpenCurlyDoubleQuote]dmformfactor-V6\[CloseCurlyDoubleQuote] provided by \
+Anand et al at https://www.ocf.berkeley.edu/~nanand/software/dmformfactor/ \
+\>", "Text",
+ CellChangeTimes->{{3.910061580146655*^9, 3.9100616124034863`*^9}, 
+   3.91006173074547*^9, {3.910061792938591*^9, 3.910061800164772*^9}, {
+   3.91006260242665*^9, 3.9100626049035683`*^9}, {3.910062636694407*^9, 
+   3.9100626377400208`*^9}},ExpressionUUID->"2ef004a2-f3cf-4f21-8990-\
+040e1a697c46"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "\"\<directory/dmformfactor-V6.m\>\""}]], "Input",
+ CellChangeTimes->{{3.910061783599441*^9, 
+  3.9100617869230947`*^9}},ExpressionUUID->"05520f51-bcb5-41b2-95d3-\
+5bc6a32a7f4a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox["\<\"Welcome to DMFormFactor version 1.1.\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[0, 0, 1],
+  FrontFaceColor->RGBColor[0, 0, 1],
+  BackFaceColor->RGBColor[0, 0, 1],
+  GraphicsColor->RGBColor[0, 0, 1],
+  FontSize->32,
+  FontColor->RGBColor[0, 0, 1]]], "Print",
+ CellChangeTimes->{3.9100618174785643`*^9},
+ CellLabel->
+  "During evaluation of \
+In[223]:=",ExpressionUUID->"cf753c8e-e878-4216-819b-668fbc905d94"],
+
+Cell[BoxData["\<\"Functions are SetCoeffsNonrel, SetCoeffsRel, SetCoeffsNucl, \
+ZeroCoeffs, SetJChi, SetMchi, SetIsotope, SetHALO, SetHelm, \
+TransitionProbability, ResponseNucl, DiffCrossSection, \
+ApproxTotalCrossSection, and EventRate.\"\>"], "Print",
+ CellChangeTimes->{3.910061817482575*^9},
+ CellLabel->
+  "During evaluation of \
+In[223]:=",ExpressionUUID->"f74f2ab3-8e8f-4d5c-8a78-84200776bd4a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.910061830385406*^9},ExpressionUUID->"c517e376-20c7-4de6-a347-\
+ac67ad9b60cd"],
+
+Cell[CellGroupData[{
+
+Cell["19F", "Subtitle",
+ CellChangeTimes->{{3.910061844240453*^9, 
+  3.9100618455505238`*^9}},ExpressionUUID->"9a70ddc4-46de-4811-90c4-\
+e8a77725400d"],
+
+Cell["\<\
+Loading the one-body density matrix element file \
+\[OpenCurlyDoubleQuote]19F_OBDME_USDB.dat\[CloseCurlyDoubleQuote] for 19F, \
+alongside the isotope information\
+\>", "Text",
+ CellChangeTimes->{{3.910062024815344*^9, 3.910062110933625*^9}, {
+  3.910062303049274*^9, 
+  3.910062303209099*^9}},ExpressionUUID->"3188bd53-4ad9-4405-8cef-\
+6841dcbfc7f8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"bFM", "=", "\"\<default\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetIsotope", "[", 
+  RowBox[{
+  "9", ",", "19", ",", "bFM", ",", "\"\<directory/19F_OBDME_USDB.dat\>\""}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.846027862067828*^9, 3.846027884370749*^9}, {
+   3.907363235605854*^9, 3.9073632382572947`*^9}, 3.907363489328722*^9, {
+   3.9073652242851543`*^9, 3.907365321977174*^9}, {3.907365394905942*^9, 
+   3.907365427115602*^9}, {3.907366001794878*^9, 3.907366003000699*^9}, {
+   3.907366564163403*^9, 3.9073665667248983`*^9}, {3.907366657088166*^9, 
+   3.907366670894374*^9}, {3.907366716336994*^9, 3.907366732301937*^9}, 
+   3.907367077308916*^9, {3.907881030919941*^9, 3.907881033971806*^9}, {
+   3.910061883698689*^9, 3.9100618850954113`*^9}},
+ CellLabel->
+  "In[224]:=",ExpressionUUID->"f6d08e18-b530-45af-9e89-3678bd546385"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.9100622801472473`*^9},ExpressionUUID->"2176524e-a50c-443f-b00d-\
+ac3068d89148"],
+
+Cell["Define function for the proton nuclear response function", "Text",
+ CellChangeTimes->{{3.910062284595955*^9, 3.9100623185158987`*^9}, 
+   3.9100641498447247`*^9},ExpressionUUID->"2b1cdb08-db55-4c53-b1d6-\
+7792180f4fb3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FinalResponseProton", "[", 
+   RowBox[{"i_", ",", "Ji_", ",", "y_"}], "]"}], ":=", " ", 
+  RowBox[{"Expand", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"4", "  ", 
+      RowBox[{"Pi", "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", "  ", "Ji"}], "+", "1"}], ")"}]}]}], ")"}], "  ", 
+    RowBox[{"Sum", "[", " ", 
+     RowBox[{
+      RowBox[{"ResponseNuclear", "[", 
+       RowBox[{"y", ",", "i", ",", "tau", ",", "tau2"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"tau", ",", "0", ",", "1"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"tau2", ",", "0", ",", "1"}], "}"}]}], "]"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.9100642923384523`*^9, 3.910064328048308*^9}},
+ CellLabel->
+  "In[235]:=",ExpressionUUID->"0c5b138e-e4dc-49f9-80fc-a429e961073f"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.9100642078206263`*^9},ExpressionUUID->"4d806504-6dde-4451-8691-\
+24a39c667239"],
+
+Cell["Calculate the proton nuclear response polynomial expressions", "Text",
+ CellChangeTimes->{{3.910064212953992*^9, 
+  3.9100642780666313`*^9}},ExpressionUUID->"f547baff-a9e7-4e51-a1fd-\
+164a39852da4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", "=", "1"}], ",", 
+   RowBox[{"i", "<", "9"}], ",", 
+   RowBox[{"i", "++"}], ",", " ", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<For i=\>\"", ",", "i", " ", ",", " ", 
+     "\"\<  the proton nuclear response function is  \>\"", " ", ",", 
+     RowBox[{"FinalResponseProton", "[", 
+      RowBox[{"i", ",", "0.5", ",", "y"}], "]"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.846028303980381*^9, 3.846028308483486*^9}, {
+  3.907363262992518*^9, 3.907363265372991*^9}, {3.909699916467718*^9, 
+  3.9096999386293163`*^9}, {3.909776433295205*^9, 3.909776524587654*^9}, {
+  3.909776565046928*^9, 3.909776571822632*^9}, {3.90978777271402*^9, 
+  3.90978778478375*^9}, {3.909788035848138*^9, 3.90978803727279*^9}, {
+  3.9097883904465446`*^9, 3.909788391388987*^9}, {3.910062185996718*^9, 
+  3.910062192220852*^9}, {3.9100642205132923`*^9, 3.910064221737595*^9}},
+ CellLabel->
+  "In[236]:=",ExpressionUUID->"9974cbfe-2622-42ce-9676-db96d49fdf66"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"81.00085193983705`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "-", 
+    RowBox[{"96.00164289170304`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "+", 
+    RowBox[{"36.20386767107982`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}], "-", 
+    RowBox[{"4.597807410912566`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "3"]}], "+", 
+    RowBox[{"0.18579490832511625`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "4"]}]}]}],
+  SequenceForm[
+  "For i=", 1, "  the proton nuclear response function is  ", 
+   81.00085193983705 E^((-2) $CellContext`y) - 96.00164289170304 
+   E^((-2) $CellContext`y) $CellContext`y + 
+   36.20386767107982 E^((-2) $CellContext`y) $CellContext`y^2 - 
+   4.597807410912566 E^((-2) $CellContext`y) $CellContext`y^3 + 
+   0.18579490832511625` E^((-2) $CellContext`y) $CellContext`y^4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064329977083*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"a827d6ee-b70a-41ad-9f7e-18af2cc23e25"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"0.9123597799624938`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "-", 
+    RowBox[{"2.3976868344953957`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "+", 
+    RowBox[{"2.364846888588838`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}], "-", 
+    RowBox[{"1.0374882664964993`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "3"]}], "+", 
+    RowBox[{"0.1708234945703391`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "4"]}]}]}],
+  SequenceForm[
+  "For i=", 2, "  the proton nuclear response function is  ", 
+   0.9123597799624938 E^((-2) $CellContext`y) - 2.3976868344953957` 
+   E^((-2) $CellContext`y) $CellContext`y + 
+   2.364846888588838 E^((-2) $CellContext`y) $CellContext`y^2 - 
+   1.0374882664964993` E^((-2) $CellContext`y) $CellContext`y^3 + 
+   0.1708234945703391 E^((-2) $CellContext`y) $CellContext`y^4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.9100643316305857`*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"779eff6d-fbd4-444e-bafe-f9a0acf7a6d3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"1.8247195599249877`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "-", 
+    RowBox[{"4.901191405204556`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "+", 
+    RowBox[{"4.899188239534795`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}], "-", 
+    RowBox[{"2.1595977767393397`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "3"]}], "+", 
+    RowBox[{"0.3542733992148339`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "4"]}]}]}],
+  SequenceForm[
+  "For i=", 3, "  the proton nuclear response function is  ", 
+   1.8247195599249877` E^((-2) $CellContext`y) - 4.901191405204556 
+   E^((-2) $CellContext`y) $CellContext`y + 
+   4.899188239534795 E^((-2) $CellContext`y) $CellContext`y^2 - 
+   2.1595977767393397` E^((-2) $CellContext`y) $CellContext`y^3 + 
+   0.3542733992148339 E^((-2) $CellContext`y) $CellContext`y^4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064333308107*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"e135fdc8-de8b-4cf0-a4d0-85aae184fc35"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"0.040267486958476165`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "-", 
+    RowBox[{"0.032213999007134966`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "+", 
+    RowBox[{"0.006442801689498367`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}]}]}],
+  SequenceForm[
+  "For i=", 4, "  the proton nuclear response function is  ", 
+   0.040267486958476165` E^((-2) $CellContext`y) - 0.032213999007134966` 
+   E^((-2) $CellContext`y) $CellContext`y + 
+   0.006442801689498367 E^((-2) $CellContext`y) $CellContext`y^2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064334862742*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"7b646094-bfed-4e88-ac13-735a28b59d25"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", "0.`"}],
+  SequenceForm["For i=", 5, "  the proton nuclear response function is  ", 0.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.91006433679373*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"2b21c0b2-a0f5-4ecd-8c8b-082eaa01d9f6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"0.02472333061692825`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "-", 
+    RowBox[{"0.0197786644935426`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "+", 
+    RowBox[{"0.00395573289870852`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}]}]}],
+  SequenceForm[
+  "For i=", 6, "  the proton nuclear response function is  ", 
+   0.02472333061692825 E^((-2) $CellContext`y) - 0.0197786644935426 
+   E^((-2) $CellContext`y) $CellContext`y + 
+   0.00395573289870852 E^((-2) $CellContext`y) $CellContext`y^2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064337082201*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"86686000-aad0-4d57-a8fa-51402bf92fcc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "1.806017926022011`"}], " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "+", 
+    RowBox[{"1.7926472859998674`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "-", 
+    RowBox[{"0.5145917172340673`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}], "+", 
+    RowBox[{"0.0345982622288642`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "3"]}]}]}],
+  SequenceForm[
+  "For i=", 7, 
+   "  the proton nuclear response function is  ", (-1.806017926022011) 
+    E^((-2) $CellContext`y) + 
+   1.7926472859998674` E^((-2) $CellContext`y) $CellContext`y - 
+   0.5145917172340673 E^((-2) $CellContext`y) $CellContext`y^2 + 
+   0.0345982622288642 E^((-2) $CellContext`y) $CellContext`y^3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064338730966*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"438253ec-4867-4100-b0bf-e30e85eb26ae"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"For i=\"\>", "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\"  the proton nuclear response function is  \"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "0.21239855216832648`"}], " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]]}], "+", 
+    RowBox[{"0.37021036606136565`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", "y"}], "-", 
+    RowBox[{"0.20768893708763056`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "2"]}], "+", 
+    RowBox[{"0.03743542360400661`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "y"}]], " ", 
+     SuperscriptBox["y", "3"]}]}]}],
+  SequenceForm[
+  "For i=", 8, 
+   "  the proton nuclear response function is  ", (-0.21239855216832648`) 
+    E^((-2) $CellContext`y) + 
+   0.37021036606136565` E^((-2) $CellContext`y) $CellContext`y - 
+   0.20768893708763056` E^((-2) $CellContext`y) $CellContext`y^2 + 
+   0.03743542360400661 E^((-2) $CellContext`y) $CellContext`y^3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.910062193099546*^9, 3.9100642238851557`*^9, 
+  3.910064340673584*^9},
+ CellLabel->
+  "During evaluation of \
+In[236]:=",ExpressionUUID->"21bcf809-a492-4792-8580-31aa86b3e2e8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{770, 696},
+WindowMargins->{{Automatic, 36}, {Automatic, 12}},
+FrontEndVersion->"13.1 for Mac OS X ARM (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d4597ab3-f134-464d-9245-a8759339dd55"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 218, 4, 98, "Title",ExpressionUUID->"86958cbe-8928-4808-af30-30277e41ee1f"],
+Cell[801, 28, 523, 9, 58, "Text",ExpressionUUID->"2ef004a2-f3cf-4f21-8990-040e1a697c46"],
+Cell[CellGroupData[{
+Cell[1349, 41, 207, 4, 30, "Input",ExpressionUUID->"05520f51-bcb5-41b2-95d3-5bc6a32a7f4a"],
+Cell[CellGroupData[{
+Cell[1581, 49, 444, 12, 101, "Print",ExpressionUUID->"cf753c8e-e878-4216-819b-668fbc905d94"],
+Cell[2028, 63, 402, 7, 63, "Print",ExpressionUUID->"f74f2ab3-8e8f-4d5c-8a78-84200776bd4a"]
+}, Open  ]]
+}, Open  ]],
+Cell[2457, 74, 147, 3, 52, "Input",ExpressionUUID->"c517e376-20c7-4de6-a347-ac67ad9b60cd"],
+Cell[CellGroupData[{
+Cell[2629, 81, 151, 3, 53, "Subtitle",ExpressionUUID->"9a70ddc4-46de-4811-90c4-e8a77725400d"],
+Cell[2783, 86, 360, 8, 58, "Text",ExpressionUUID->"3188bd53-4ad9-4405-8cef-6841dcbfc7f8"],
+Cell[3146, 96, 879, 16, 52, "Input",ExpressionUUID->"f6d08e18-b530-45af-9e89-3678bd546385"],
+Cell[4028, 114, 149, 3, 52, "Input",ExpressionUUID->"2176524e-a50c-443f-b00d-ac3068d89148"],
+Cell[4180, 119, 225, 3, 35, "Text",ExpressionUUID->"2b1cdb08-db55-4c53-b1d6-7792180f4fb3"],
+Cell[4408, 124, 833, 23, 73, "Input",ExpressionUUID->"0c5b138e-e4dc-49f9-80fc-a429e961073f"],
+Cell[5244, 149, 149, 3, 52, "Input",ExpressionUUID->"4d806504-6dde-4451-8691-24a39c667239"],
+Cell[5396, 154, 204, 3, 35, "Text",ExpressionUUID->"f547baff-a9e7-4e51-a1fd-164a39852da4"],
+Cell[CellGroupData[{
+Cell[5625, 161, 1011, 20, 73, "Input",ExpressionUUID->"9974cbfe-2622-42ce-9676-db96d49fdf66"],
+Cell[CellGroupData[{
+Cell[6661, 185, 1655, 41, 45, "Print",ExpressionUUID->"a827d6ee-b70a-41ad-9f7e-18af2cc23e25"],
+Cell[8319, 228, 1662, 41, 45, "Print",ExpressionUUID->"779eff6d-fbd4-444e-bafe-f9a0acf7a6d3"],
+Cell[9984, 271, 1658, 41, 45, "Print",ExpressionUUID->"e135fdc8-de8b-4cf0-a4d0-85aae184fc35"],
+Cell[11645, 314, 1180, 29, 45, "Print",ExpressionUUID->"7b646094-bfed-4e88-ac13-735a28b59d25"],
+Cell[12828, 345, 507, 11, 24, "Print",ExpressionUUID->"2b21c0b2-a0f5-4ecd-8c8b-082eaa01d9f6"],
+Cell[13338, 358, 1170, 29, 45, "Print",ExpressionUUID->"86686000-aad0-4d57-a8fa-51402bf92fcc"],
+Cell[14511, 389, 1441, 37, 45, "Print",ExpressionUUID->"438253ec-4867-4100-b0bf-e30e85eb26ae"],
+Cell[15955, 428, 1453, 37, 45, "Print",ExpressionUUID->"21bcf809-a492-4792-8580-31aa86b3e2e8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
